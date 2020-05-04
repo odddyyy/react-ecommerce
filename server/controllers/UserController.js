@@ -28,7 +28,6 @@ class UserController {
         try {
             const find = await User.findOne({where: { email }})
             if (!find) throw ({status:400, message: 'Invalid email / password'})
-            console.log(find)
             const checkPassword = decryptPassword(password, find.password)
             if (!checkPassword) throw ({status:400, message: 'Invalid email / password'})
             const token = createToken({

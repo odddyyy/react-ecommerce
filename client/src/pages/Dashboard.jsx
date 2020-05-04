@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react'
-import Sidenav from '../components/Sidenav'
 import { useHistory } from 'react-router-dom'
+import Sidenav from '../components/Sidenav'
+import MainDahsboard from '../components/MainDashboard'
 
-export default function Main() {
+
+export default function Dashboard() {
     const history = useHistory()
-    if (!localStorage.token) history.push('/')
+    // if (!localStorage.token) history.push('/')
 
+    useEffect(() => {
+
+    },[])
     
     return (
-        <div>
+        <div className="main-container">
             <Sidenav />
+            <MainDahsboard />
         </div>
     )
 }

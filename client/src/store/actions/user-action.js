@@ -1,29 +1,21 @@
 import axios from 'axios'
-const SERVER_URL = 'http://localhost:3001'
 
-export const loggingIn = (email, password) => {
+export const loggingIn = (data) => {
     return async dispatch => {
-        try {
-            const { data } = await axios({
-                method: 'POST',
-                url: `${SERVER_URL}/user/login`,
-                data: {
-                    email,
-                    password
-                }
-            })
-            const { name, token, admin } = data
+        const { name, token, admin } = data
+        await dispatch({
+            type: 'LOGGING_IN',
+            payload: {
+                name,
+                token,
+                admin
+            }
+        })
+    }
+}
 
-            dispatch({
-                type: 'LOGGING_IN',
-                payload: {
-                    name,
-                    token,
-                    admin
-                }
-            })
-        } catch (err) {
-            console.log(err)
-        }
+export const loggingOut = () => {
+    return async dispatch => {
+        dispatch({ type: 'LOGGING_OUT' })
     }
 }
