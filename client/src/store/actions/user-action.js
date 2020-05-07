@@ -1,4 +1,5 @@
 import axios from 'axios'
+const SERVER_URL = 'http://localhost:3001'
 
 export const loggingIn = (data) => {
     return async dispatch => {
@@ -17,5 +18,15 @@ export const loggingIn = (data) => {
 export const loggingOut = () => {
     return async dispatch => {
         dispatch({ type: 'LOGGING_OUT' })
+    }
+}
+
+export const getAllUser = () => {
+    return async dispatch => {
+        const { data } = await axios(`${SERVER_URL}/user`)
+        await dispatch({
+            type: 'GET_USERS',
+            payload: data
+        })
     }
 }

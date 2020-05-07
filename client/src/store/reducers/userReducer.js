@@ -1,6 +1,7 @@
 const initState = {
     name: '',
-    isAdmin: false
+    isAdmin: false,
+    users: []
 }
 
 const userReducer = (state = initState, action) => {
@@ -12,6 +13,9 @@ const userReducer = (state = initState, action) => {
         case 'LOGGING_OUT':
             localStorage.removeItem('token')
             return {...state, name: '', isAdmin: false}
+
+        case 'GET_USERS':
+            return {...state, users: action.payload}
         
         default:
             return state
