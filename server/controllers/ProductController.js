@@ -25,8 +25,8 @@ class ProductController {
     static async addProduct (req, res, next) {
         const { name, quantity, image, price, category } = req.body
         try {
-            await Product.create({ name, quantity, image, price, category })
-            res.status(201).json('added new product')
+            const added = await Product.create({ name, quantity, image, price, category })
+            res.status(201).json(added)
         } catch (err) {
             next(err)
         }
