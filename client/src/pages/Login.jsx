@@ -14,7 +14,7 @@ export default function Login() {
     return (
         <div style={styles.container}>
             <div className="container">
-                <div className="row">
+                <div className="row" style={{minHeight:'100vh'}}>
                     <div className="col-md-6" style={styles.colStyle}>
                         <img src={Logo} style={styles.imgStyle} alt="logo"/>
                     </div>
@@ -27,13 +27,14 @@ export default function Login() {
 
 const styles = {
     container:{
-        background:'#e7ebcc',
-        minHeight:'100vh'
+        background:'#e7ebcc'
     },
     colStyle : {
     },
     imgStyle : {
-        marginLeft:'10%',
+        margin:'auto',
+        marginTop:'30%',
+        marginLeft: '10%',
         width:'350px', 
         height:'350px'
     }
