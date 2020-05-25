@@ -17,7 +17,21 @@ const productReducer = (state = initialState, action) => {
                 if (i.id != action.payload) newProducts.push(i)
             })
             return {...state, products: newProducts}
-    
+            
+        case 'UPDATE_PRODUCT':
+            const { id, name, quantity, price, image, category } = action.payload
+            let updated = [...state.products]
+            updated.forEach(i => {
+                if (i.id === id) {
+                    i.name = name
+                    i.quantity = quantity
+                    i.price = price
+                    i.image = image
+                    i.category = category
+                }
+            })
+            return {...state, products: updated}
+
         default:
             return state
     }

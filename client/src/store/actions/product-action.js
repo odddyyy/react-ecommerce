@@ -4,7 +4,7 @@ const SERVER_URL = 'http://localhost:3001'
 export const getProducts = () => {
     return async dispatch => {
         const { data } = await axios(`${SERVER_URL}/product`)
-        console.log(data)
+        const sorted = data.sort((a,b) => a.id - b.id)
         await dispatch({
             type: 'GET_PRODUCTS',
             payload: {
@@ -39,6 +39,21 @@ export const removeProduct = (id) => {
         await dispatch({
             type: 'DEL_PRODUCT',
             payload: id
+        })
+    }
+}
+
+export const editProduct = (id, name, quantity, price, image, category) => {
+    return async dispatch => {
+        await axios({
+            method: 'PUT',
+            url: `${SERVER_URL}/product/${id}`,
+            headers: {token: localStorage.token},
+            data: { name, quantity, price, image, category }
+        })
+        await dispatch({
+            type: 'UPDATE_PRODUCT',
+            payload: { id, name, quantity, price, image, category }
         })
     }
 }

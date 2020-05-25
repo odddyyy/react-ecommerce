@@ -20,6 +20,7 @@ export default function Dashboard() {
     const [toggle, setToggle] = useState(0)
 
     useEffect(() => {
+        console.log('ASASAS')
         dispatch(getProducts())
         dispatch(getAllUser())
     },[])

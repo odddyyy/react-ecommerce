@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 //modal component
 import AddProduct from './AddProduct'
+import EditProduct from './EditProduct'
 //helper
 import { convertToRupiah } from '../../helpers/coverter'
 //action
@@ -35,30 +36,34 @@ export default function Products({ products }) {
     return (
         <div>
           <button className="btn btn-primary" onClick={() => setShow(true)}><i className="fas fa-plus-square mr-2"></i>Product</button>
-          <table className="table table-responsive mt-3">
-              <thead>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Category</th>
-                  <th>Image</th>
-              </thead>
-              <tbody>
-                {products.map(product => (
+          <div className="table-wrapper-scroll-y my-custom-scrollbar">
+            <table className="table table-responsive table-striped mt-3">
+                <thead className="fixed">
                     <tr>
-                        <td>{product.name}</td>
-                        <td>{product.quantity}</td>
-                        <td>{convertToRupiah(product.price)}</td>
-                        <td>{product.category}</td>
-                        <td><img src={product.image} style={{widht:'30px', height:'30px'}}/></td>
-                        <td colSpan="2">
-                        <i className="fas fa-edit" style={{cursor:'pointer'}}></i>
-                            <span onClick={() => deleteProduct(product.id)}><i className="fas fa-trash-alt ml-1" style={{cursor:'pointer'}} ></i></span>
-                        </td>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Image</th>
                     </tr>
-                ))}
-              </tbody>
-          </table>
+                </thead>
+                <tbody>
+                    {products.map(product => (
+                        <tr>
+                            <td>{product.name}</td>
+                            <td>{product.quantity}</td>
+                            <td>{convertToRupiah(product.price)}</td>
+                            <td>{product.category}</td>
+                            <td><img src={product.image} style={{widht:'30px', height:'30px'}}/></td>
+                            <td colSpan="2">
+                                <EditProduct id={product.id} />
+                                <span onClick={() => deleteProduct(product.id)}><i className="fas fa-trash-alt ml-1 text-danger" style={{cursor:'pointer'}} ></i></span>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+          </div>
           <AddProduct toggleModal={toggleModal} show={show}/>
         </div>
     )

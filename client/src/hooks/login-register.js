@@ -11,6 +11,7 @@ export const Login = async (email, password) => {
             url: `${SERVER_URL}/user/login`,
             data: { email, password }
         })
+        if (!data.admin) throw ({response: {data: 'Not authorized!'}})
         Swal.fire({
             position:'top-right',
             title: `Welcome admin ${data.name}`,
