@@ -18,10 +18,11 @@ class ProductController {
         console.log(id)
         console.log(req.params)
         try {
-            const product = await Product.findByPk(id)
-            res.status(200).json(product)
-        } catch (err) {
-            next(err)
+            const { testing, barang } = req.body
+            const getProduct = await Product.findOne({where:{ id }})
+            res.status(200).json(getProduct)
+        } catch (error) {
+            next(error)
         }
     }
 
