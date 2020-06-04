@@ -16,6 +16,7 @@ class ProductController {
     static async getOneProduct (req, res, next) {
         const { id } = req.params
         console.log(id)
+        //comment
         try {
             const product = await Product.findByPk(id)
             res.status(200).json(product)
