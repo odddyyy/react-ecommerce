@@ -1,4 +1,6 @@
 const { Product } = require('../models')
+const Sequilize = require('sequelize')
+const testing = require('../helpers/testing')
 
 class ProductController {
 
@@ -25,8 +27,9 @@ class ProductController {
     static async addProduct (req, res, next) {
         const { name, quantity, image, price, category } = req.body
         try {
-            const added = await Product.create({ name, quantity, image, price, category })
-            res.status(201).json(added)
+            // const added = await Product.create({ name, quantity, image, price, category })
+            testing({ namaBarang: name })
+            res.status(201).json({ namaBarang: name })
         } catch (err) {
             next(err)
         }
@@ -52,6 +55,26 @@ class ProductController {
             res.status(201).json('product updated')
         } catch (err) {
             next(err)
+        }
+    }
+
+    static async searchProduct (req, res, next) {
+        const { search } = req.query
+        const Op = Sequilize.Op
+        try {
+            const findProduct = await Product.findAll({
+                where: {
+                    // quantity: 100,
+                    [Op.or]: [
+                        { name: { [Op.iLike]: `%${search}%` } },
+                        { category: { [Op.iLike]: `%${search}%` } }
+                    ]
+                }
+            })
+            console.log(findProduct)
+            res.json(findProduct)
+        } catch (err) {
+            res.json(err)
         }
     }
 }
